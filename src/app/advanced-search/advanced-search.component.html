@@ -1,0 +1,75 @@
+
+
+    <div style="text-align: center;"><h1>Advanced search</h1></div>
+  
+    <table width="60%" style="margin: auto;border-spacing:2em 2em;border-collapse:separate;" id="cssTable">
+        <tr><td colspan="5" style="text-align: right;"><i style="zoom:2;cursor:pointer;color:green;" class="fa fa-plus" aria-hidden="true" (click)="addRequest()"></i> </td></tr>
+        <tr style="background-color:#e9ecef;">
+          <th>Naziv polja</th>
+          <th>Vrednost</th>
+          <th>Operator</th>
+          <th>Fraza?</th>
+          <th></th>
+          </tr>
+          <tr *ngFor="let searchedReq of searchedRequests">
+            <td>
+                <select [(ngModel)]="searchedReq.fieldName" class="bootstrap-select">
+                    <option value="name" selected="selected">Name</option>
+                    <option value="lastName">Surname</option>
+                    <option value="education">Education</option>
+                    <option value="cvContent">Cv content</option>
+                    <option value="coverLetterContent">Cover letter content</option>
+                  </select>
+            </td>
+            <td>
+              <input [(ngModel)]="searchedReq.value" type="text" style="border-radius:0" class="form-control">
+            </td>
+            <td>
+                <select [(ngModel)]="searchedReq.operator" class="bootstrap-select">
+                    <option value="AND" selected="selected">AND</option>
+                    <option value="OR">OR</option>
+                  </select>
+              </td>
+              <td>          
+                    <input [(ngModel)]="searchedReq.phrased" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              </td>
+            <td>
+                <i
+                class="fa fa-times"
+                *ngIf="searchedReq.id!==1"
+                style="color: red; zoom: 2; cursor: pointer"
+                (click)="removeRequest(searchedReq)"
+              ></i>
+            </td>
+            </tr>
+      </table>
+    
+      <div style="text-align: center;margin-top: 3%;">  <button type="button" class="btn btn-primary" (click)="advancedSearch()">Search</button></div>
+
+  <!----------------------------------->    
+
+      <div *ngFor="let searchResult of advancedSearchResults"  style="margin-left: auto;
+      margin-right: auto;margin-top:3%">
+       <table width="80%" id="cssTable" style="border: 1px solid black; margin:auto">
+        <thead>
+            <tr>
+              <th scope="col">Data</th>
+              <th *ngIf="searchResult.cvHighLight" scope="col">CV content</th>
+              <th *ngIf="searchResult.clHighLight" scope="col">Cover Letter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Name: {{searchResult.name}}</td>
+              <td rowspan="3" *ngIf="searchResult.cvHighLight"> <div [innerHTML]="searchResult.cvHighLight"></div></td>
+              <td rowspan="3" *ngIf="searchResult.clHighLight"> <div [innerHTML]="searchResult.clHighLight"></div></td>
+            </tr>
+            <tr>
+              <td>Surname: {{searchResult.lastName}}</td>
+            </tr>
+            <tr>
+              <td>Education:  {{searchResult.education}}</td>
+            </tr>
+          </tbody>
+       </table>
+      </div>
