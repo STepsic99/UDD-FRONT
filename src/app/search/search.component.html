@@ -1,0 +1,40 @@
+<form class="row g-3" style="margin-left: 25%;">
+    <div class="col-4">
+      <label for="staticEmail2" class="visually-hidden">Enter name, surname, education, cv or cover letter content:</label>
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Enter name, surname, education, cv or cover letter content:">
+    </div>
+    <div class="col-auto">
+      <label for="inputPassword2" class="visually-hidden">Query</label>
+      <input type="text" class="form-control" id="inputPassword2" placeholder="Query" name="query"  [(ngModel)]="basicQuery">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3" (click)="simpleSearch()">Search</button>
+    </div>
+  </form>
+
+  <div *ngFor="let searchResult of basicSearchResults"  style="margin-left: auto;
+  margin-right: auto;margin-top:3%">
+   <table width="80%" id="cssTable" style="border: 1px solid black; margin:auto">
+    <thead>
+        <tr>
+          <th scope="col">Data</th>
+          <th *ngIf="searchResult.cvHighLight" scope="col">CV content</th>
+          <th *ngIf="searchResult.clHighLight" scope="col">Cover Letter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name: {{searchResult.name}}</td>
+          <td rowspan="3" *ngIf="searchResult.cvHighLight"> <div [innerHTML]="searchResult.cvHighLight"></div></td>
+          <td rowspan="3" *ngIf="searchResult.clHighLight"> <div [innerHTML]="searchResult.clHighLight"></div></td>
+        </tr>
+        <tr>
+          <td>Surname: {{searchResult.lastName}}</td>
+        </tr>
+        <tr>
+          <td>Education:  {{searchResult.education}}</td>
+        </tr>
+      </tbody>
+   </table>
+  </div>
+
