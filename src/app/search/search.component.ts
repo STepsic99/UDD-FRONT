@@ -15,6 +15,9 @@ export class SearchComponent implements OnInit {
 
   basicQuery:string = '';
   basicSearchResults:any = [];
+  city:string = '';
+  radius:number | undefined;
+  geolocationSearchResults:any = [];
 
   ngOnInit(): void {
   }
@@ -23,6 +26,13 @@ export class SearchComponent implements OnInit {
     this.http.get('http://localhost:8080/api/applicants/basic-search?searchedText='+ this.basicQuery).subscribe(res => {
       console.log(res)
       this.basicSearchResults = res;
+    });
+  }
+
+  geolocationSearch(){
+    this.http.get('http://localhost:8080/api/applicants/geolocation-search?city='+this.city+'&radius='+ this.radius).subscribe(res => {
+      console.log(res)
+      this.geolocationSearchResults = res;
     });
   }
 }

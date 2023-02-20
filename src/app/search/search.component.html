@@ -41,3 +41,47 @@
    </table>
   </div>
 
+
+  <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <form class="row g-3" style="margin-left: 25%;margin-top:10%">
+    <div class="col-2">
+      <label for="staticEmail2" class="visually-hidden">Enter city name and radius(km) :</label>
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Enter city name and radius(km) :">
+    </div>
+    <div class="col-auto">
+      <label for="inputPassword2" class="visually-hidden">City</label>
+      <input type="text" class="form-control" id="inputPassword2" placeholder="City" name="city"  [(ngModel)]="city">
+    </div>
+    <div class="col-auto">
+      <label for="inputPassword2" class="visually-hidden">Query</label>
+      <input type="number" min="0" class="form-control" id="inputPassword2" placeholder="Radius" name="radius"  [(ngModel)]="radius">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3" (click)="geolocationSearch()">Search</button>
+    </div>
+  </form>
+
+  <div *ngFor="let geoSearchResult of geolocationSearchResults"  style="margin-left: auto;
+  margin-right: auto;margin-top:3%">
+   <table width="80%" id="cssTable" style="border: 1px solid black; margin:auto">
+    <thead>
+        <tr>
+          <th scope="col">Data</th>       
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Name: {{geoSearchResult.name}}</td>
+        </tr>
+        <tr>
+          <td>Surname: {{geoSearchResult.lastName}}</td>
+        </tr>
+        <tr>
+          <td>Education:  {{geoSearchResult.education}}</td>
+        </tr>
+        <tr>
+          <td>Address:  {{geoSearchResult.address}}</td>
+        </tr>
+      </tbody>
+   </table>
+  </div>
